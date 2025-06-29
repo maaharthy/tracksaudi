@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>TrackSaudi | تتبع شحنتك</title>
+</head>
+<body>
+    <h2>🔍 تتبع شحنتك</h2>
+    <form method="POST">
+        رقم التتبع: <input type="text" name="tracking_number" required><br><br>
+
+        شركة الشحن:
+        <select name="courier" required>
+            {% for name, slug in couriers %}
+                <option value="{{ slug }}">{{ name }}</option>
+            {% endfor %}
+        </select><br><br>
+
+        <button type="submit">🔎 تتبع الآن</button>
+    </form>
+
+    {% if result %}
+        <h3>📦 نتيجة التتبع:</h3>
+        <pre>{{ result | tojson(indent=2, ensure_ascii=False) }}</pre>
+    {% endif %}
+</body>
+</html>
